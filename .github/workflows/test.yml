@@ -28,7 +28,7 @@ jobs:
             - name: Run tests
               run: ./run-tests.sh
               env:
-                CHANNEL: "alpha"
+                CHANNEL: "beta"
                 BUILD_SERVER: "https://build-stage.defold.com"
                 PLATFORMS: "x86_64-linux"
                 PROJECTS: ${{ matrix.projects }}
