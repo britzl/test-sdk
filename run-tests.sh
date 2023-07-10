@@ -91,6 +91,7 @@ check_error() {
 	local status=$1
 	local name=$2
 	local platform=$3
+	echo "check error $1 $status $name $platform"
 	if [ $status -ne 0 ]; then
 		pushd $SCRIPTDIR
 		touch ./${ERRORTXT}
@@ -126,7 +127,7 @@ build_project() {
 			set +e
 		fi
 		bob --platform ${i} build --build-server $BUILD_SERVER --use-async-build-server --defoldsdk ${SHA1} --variant=$variant
-		log "After bob $?"
+		# log "After bob $?"
 		check_error $? $url $i
 
 		if [ "$HANDLE_ERRORS" == "true" ]; then
