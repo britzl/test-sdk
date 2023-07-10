@@ -128,6 +128,7 @@ build_project() {
 		check_error $? $url $i
 
 		if [ "$HANDLE_ERRORS" == "true" ]; then
+			echo "ENABLING ERRORS"
 			# set -e
 		fi
 	done
