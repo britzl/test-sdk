@@ -98,16 +98,20 @@ check_error() {
 		pushd $SCRIPTDIR
 		log "LS -LA"
 		ls -la .
+		ls -la build
 		log "BEFORE TOUCH"
 		touch ./${ERRORTXT}
 		log "AFTER TOUCH"
 		ls -la .
+		ls -la build
 		log "Failed to build '${name}'' for ${platform}" >> "./${ERRORTXT}"
+		less ./${ERRORTXT}
 		popd
 	fi
 }
 
 check_failed_builds() {
+	log "CHECK FAILED BUILDS"
 	if [ -f ./${ERRORTXT} ]; then
 		echo "At least one of the builds failed:"
 		cat ./${ERRORTXT}
@@ -161,5 +165,6 @@ for project in ${PROJECTS[@]}; do
 	rm -rf $BUILD_FOLDER
 done
 
+log "BUILD PROJECTS DONE"
 cd ${SCRIPTDIR}
 check_failed_builds
