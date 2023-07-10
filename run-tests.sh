@@ -60,7 +60,7 @@ if [ ! -d "$BUILD_FOLDER" ]; then
 	mkdir -p $BUILD_FOLDER
 fi
 
-ERRORTXT=${BUILD_FOLDER}/errors.txt
+ERRORTXT=${SCRIPTDIR}/errors.txt
 
 function cleanup() {
 	log "Cleaning up"
@@ -100,21 +100,21 @@ check_error() {
 		ls -la .
 		ls -la build
 		log "BEFORE TOUCH"
-		touch ./${ERRORTXT}
+		touch ${ERRORTXT}
 		log "AFTER TOUCH"
 		ls -la .
 		ls -la build
-		log "Failed to build '${name}' for ${platform}" >> "./${ERRORTXT}"
-		less ./${ERRORTXT}
+		log "Failed to build '${name}' for ${platform}" >> "${ERRORTXT}"
+		less ${ERRORTXT}
 		popd
 	fi
 }
 
 check_failed_builds() {
 	log "CHECK FAILED BUILDS"
-	if [ -f "./${ERRORTXT}" ]; then
+	if [ -f "${ERRORTXT}" ]; then
 		echo "At least one of the builds failed:"
-		cat ./${ERRORTXT}
+		cat ${ERRORTXT}
 		exit 1
 	fi
 }
@@ -162,9 +162,10 @@ for project in ${PROJECTS[@]}; do
 	build_project $PLATFORMS $project debug
 	build_project $PLATFORMS $project release
 	build_project $PLATFORMS $project headless
-	# rm -rf $BUILD_FOLDER
+	rm -rf $BUILD_FOLDER
 done
 
 log "BUILD PROJECTS DONE"
 ls -la
+cd $SCRIPTDIR
 check_failed_builds
