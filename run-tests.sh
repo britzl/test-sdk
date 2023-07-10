@@ -94,7 +94,10 @@ check_error() {
 	echo "check error $1 $status $name $platform"
 
 	if [ $status -ne 0 ]; then
-		log "OMG OMG OMG"
+		log "OMG OMG OMG $SCRIPTDIR"
+		pushd $SCRIPTDIR
+		log "PUSHED SCRIPTDIR"
+		popd
 	fi
 
 	if [ $status -ne 0 ]; then
