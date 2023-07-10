@@ -30,7 +30,7 @@ jobs:
               env:
                 CHANNEL: "beta"
                 BUILD_SERVER: "https://build-stage.defold.com"
-                PLATFORMS: "x86_64-linux"
+                PLATFORMS: "armv7-android"
                 PROJECTS: ${{ matrix.projects }}
             - name: Notify if tests failed
               if: failure()
