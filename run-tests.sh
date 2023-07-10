@@ -104,7 +104,7 @@ check_error() {
 		log "AFTER TOUCH"
 		ls -la .
 		ls -la build
-		log "Failed to build '${name}'' for ${platform}" >> "./${ERRORTXT}"
+		log "Failed to build '${name}' for ${platform}" >> "./${ERRORTXT}"
 		less ./${ERRORTXT}
 		popd
 	fi
@@ -112,7 +112,7 @@ check_error() {
 
 check_failed_builds() {
 	log "CHECK FAILED BUILDS"
-	if [ -f ./${ERRORTXT} ]; then
+	if [ -f "./${ERRORTXT}" ]; then
 		echo "At least one of the builds failed:"
 		cat ./${ERRORTXT}
 		exit 1
@@ -166,5 +166,8 @@ for project in ${PROJECTS[@]}; do
 done
 
 log "BUILD PROJECTS DONE"
+ls -la
 cd ${SCRIPTDIR}
+log "LS AFTER CD"
+ls -la
 check_failed_builds
