@@ -92,6 +92,11 @@ check_error() {
 	local name=$2
 	local platform=$3
 	echo "check error $1 $status $name $platform"
+
+	if [ $status -ne 0 ]; then
+		log "OMG OMG OMG"
+	fi
+
 	if [ $status -ne 0 ]; then
 		pushd $SCRIPTDIR
 		touch ./${ERRORTXT}
