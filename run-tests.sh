@@ -94,15 +94,14 @@ check_error() {
 	echo "check error $1 $status $name $platform"
 
 	if [ $status -ne 0 ]; then
-		log "OMG OMG OMG $SCRIPTDIR"
+		log "OMG OMG OMG ${SCRIPTDIR} ${ERRORTXT}"
 		pushd $SCRIPTDIR
-		log "PUSHED SCRIPTDIR"
-		popd
-	fi
-
-	if [ $status -ne 0 ]; then
-		pushd $SCRIPTDIR
+		log "LS -LA"
+		ls -la .
+		log "BEFORE TOUCH"
 		touch ./${ERRORTXT}
+		log "AFTER TOUCH"
+		ls -la .
 		log "Failed to build '${name}'' for ${platform}" >> "./${ERRORTXT}"
 		popd
 	fi
@@ -112,7 +111,7 @@ check_failed_builds() {
 	if [ -f ./${ERRORTXT} ]; then
 		echo "At least one of the builds failed:"
 		cat ./${ERRORTXT}
-	    exit 1
+		exit 1
 	fi
 }
 
