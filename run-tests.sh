@@ -162,12 +162,9 @@ for project in ${PROJECTS[@]}; do
 	build_project $PLATFORMS $project debug
 	build_project $PLATFORMS $project release
 	build_project $PLATFORMS $project headless
-	rm -rf $BUILD_FOLDER
+	# rm -rf $BUILD_FOLDER
 done
 
 log "BUILD PROJECTS DONE"
-ls -la
-cd ${SCRIPTDIR}
-log "LS AFTER CD"
 ls -la
 check_failed_builds
